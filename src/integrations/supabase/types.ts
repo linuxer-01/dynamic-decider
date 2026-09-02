@@ -14,7 +14,212 @@ export type Database = {
   }
   public: {
     Tables: {
-      [_ in never]: never
+      criteria: {
+        Row: {
+          created_at: string
+          event_id: string
+          id: string
+          max_marks: number
+          name: string
+          position: number
+        }
+        Insert: {
+          created_at?: string
+          event_id: string
+          id?: string
+          max_marks?: number
+          name: string
+          position?: number
+        }
+        Update: {
+          created_at?: string
+          event_id?: string
+          id?: string
+          max_marks?: number
+          name?: string
+          position?: number
+        }
+        Relationships: [
+          {
+            foreignKeyName: "criteria_event_id_fkey"
+            columns: ["event_id"]
+            isOneToOne: false
+            referencedRelation: "events"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      events: {
+        Row: {
+          created_at: string
+          description: string | null
+          event_date: string | null
+          id: string
+          join_code: string
+          name: string
+          status: string
+          tie_mode: string
+          updated_at: string
+          venue: string | null
+        }
+        Insert: {
+          created_at?: string
+          description?: string | null
+          event_date?: string | null
+          id?: string
+          join_code: string
+          name: string
+          status?: string
+          tie_mode?: string
+          updated_at?: string
+          venue?: string | null
+        }
+        Update: {
+          created_at?: string
+          description?: string | null
+          event_date?: string | null
+          id?: string
+          join_code?: string
+          name?: string
+          status?: string
+          tie_mode?: string
+          updated_at?: string
+          venue?: string | null
+        }
+        Relationships: []
+      }
+      judges: {
+        Row: {
+          created_at: string
+          device_status: string
+          device_token: string | null
+          event_id: string
+          id: string
+          name: string
+          requested_at: string | null
+        }
+        Insert: {
+          created_at?: string
+          device_status?: string
+          device_token?: string | null
+          event_id: string
+          id?: string
+          name: string
+          requested_at?: string | null
+        }
+        Update: {
+          created_at?: string
+          device_status?: string
+          device_token?: string | null
+          event_id?: string
+          id?: string
+          name?: string
+          requested_at?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "judges_event_id_fkey"
+            columns: ["event_id"]
+            isOneToOne: false
+            referencedRelation: "events"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      participants: {
+        Row: {
+          created_at: string
+          details: string | null
+          event_id: string
+          id: string
+          name: string
+          position: number
+        }
+        Insert: {
+          created_at?: string
+          details?: string | null
+          event_id: string
+          id?: string
+          name: string
+          position?: number
+        }
+        Update: {
+          created_at?: string
+          details?: string | null
+          event_id?: string
+          id?: string
+          name?: string
+          position?: number
+        }
+        Relationships: [
+          {
+            foreignKeyName: "participants_event_id_fkey"
+            columns: ["event_id"]
+            isOneToOne: false
+            referencedRelation: "events"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      scores: {
+        Row: {
+          criterion_id: string
+          event_id: string
+          id: string
+          judge_id: string
+          participant_id: string
+          submitted_at: string
+          value: number
+        }
+        Insert: {
+          criterion_id: string
+          event_id: string
+          id?: string
+          judge_id: string
+          participant_id: string
+          submitted_at?: string
+          value?: number
+        }
+        Update: {
+          criterion_id?: string
+          event_id?: string
+          id?: string
+          judge_id?: string
+          participant_id?: string
+          submitted_at?: string
+          value?: number
+        }
+        Relationships: [
+          {
+            foreignKeyName: "scores_criterion_id_fkey"
+            columns: ["criterion_id"]
+            isOneToOne: false
+            referencedRelation: "criteria"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "scores_event_id_fkey"
+            columns: ["event_id"]
+            isOneToOne: false
+            referencedRelation: "events"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "scores_judge_id_fkey"
+            columns: ["judge_id"]
+            isOneToOne: false
+            referencedRelation: "judges"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "scores_participant_id_fkey"
+            columns: ["participant_id"]
+            isOneToOne: false
+            referencedRelation: "participants"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
     }
     Views: {
       [_ in never]: never
