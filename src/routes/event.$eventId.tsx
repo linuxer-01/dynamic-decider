@@ -377,8 +377,8 @@ function JudgesTab({ data }: { data: EventSnapshot }) {
 }
 
 function DeviceBadge({ status }: { status: string }) {
-  if (status === "approved") return <Badge className="bg-[hsl(var(--success))] text-background">Device approved</Badge>;
-  if (status === "pending") return <Badge className="bg-[hsl(var(--warning))] text-background">Awaiting approval</Badge>;
+  if (status === "approved") return <Badge className="bg-success text-success-foreground">Device approved</Badge>;
+  if (status === "pending") return <Badge className="bg-warning text-warning-foreground">Awaiting approval</Badge>;
   return <Badge variant="secondary">No device</Badge>;
 }
 
@@ -606,7 +606,7 @@ function ProgressTab({ data }: { data: EventSnapshot }) {
                   {data.judges.map((j) => (
                     <td key={j.id} className="p-3">
                       {hasSubmission(data.scores, j.id, p.id) ? (
-                        <span className="inline-flex items-center gap-1 text-[hsl(var(--success))]">
+                        <span className="inline-flex items-center gap-1 text-success">
                           <CheckCircle2 className="h-4 w-4" />
                           <span className="score-num">{judgeTotalFor(data.scores, j.id, p.id)}</span>
                         </span>
@@ -700,9 +700,9 @@ function ResultsTab({ data }: { data: EventSnapshot }) {
 }
 
 function podiumClass(rank: number) {
-  if (rank === 1) return "border-[hsl(var(--gold))]";
-  if (rank === 2) return "border-[hsl(var(--silver))]";
-  return "border-[hsl(var(--bronze))]";
+  if (rank === 1) return "border-gold";
+  if (rank === 2) return "border-silver";
+  return "border-bronze";
 }
 
 function ordinal(n: number) {
